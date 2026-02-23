@@ -23,7 +23,7 @@ class WordPressClient:
     def publish(self, title: str, content: str, seo_meta: dict, status: str = "draft") -> dict:
         payload = self._build_payload(title, content, seo_meta, status)
         response = requests.post(
-            f"{self.base_url}/wp-json/wp/v2/posts",
+            f"{self.base_url}/?rest_route=/wp/v2/posts",
             json=payload,
             auth=self.auth,
             timeout=30,

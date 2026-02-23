@@ -21,15 +21,15 @@ class LLMTask(str, Enum):
 
 
 _ROUTING = {
-    LLMTask.PRODUCT_RESEARCH:   lambda: ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=config.GOOGLE_API_KEY),
-    LLMTask.KEYWORD_ANALYSIS:   lambda: ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=config.GOOGLE_API_KEY),
-    LLMTask.REVIEW_OUTLINE:     lambda: ChatOllama(model="llama3.2", base_url=config.OLLAMA_BASE_URL),
-    LLMTask.CONTENT_WRITER_KO:  lambda: ChatAnthropic(model="claude-sonnet-4-6", api_key=config.ANTHROPIC_API_KEY),
+    LLMTask.PRODUCT_RESEARCH:   lambda: ChatOpenAI(model="gpt-4o-mini", api_key=config.OPENAI_API_KEY),
+    LLMTask.KEYWORD_ANALYSIS:   lambda: ChatOpenAI(model="gpt-4o-mini", api_key=config.OPENAI_API_KEY),
+    LLMTask.REVIEW_OUTLINE:     lambda: ChatOllama(model="llama3.1:latest", base_url=config.OLLAMA_BASE_URL),
+    LLMTask.CONTENT_WRITER_KO:  lambda: ChatOpenAI(model="gpt-4o", api_key=config.OPENAI_API_KEY),
     LLMTask.CONTENT_WRITER_EN:  lambda: ChatOpenAI(model="gpt-4o", api_key=config.OPENAI_API_KEY),
-    LLMTask.TRANSLATOR:         lambda: ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=config.GOOGLE_API_KEY),
-    LLMTask.AFFILIATE_LINKER:   lambda: ChatOllama(model="llama3.2", base_url=config.OLLAMA_BASE_URL),
-    LLMTask.SEO_OPTIMIZER:      lambda: ChatOllama(model="qwen2.5", base_url=config.OLLAMA_BASE_URL),
-    LLMTask.SOCIAL_SNIPPETS_KO: lambda: ChatAnthropic(model="claude-haiku-4-5-20251001", api_key=config.ANTHROPIC_API_KEY),
+    LLMTask.TRANSLATOR:         lambda: ChatOpenAI(model="gpt-4o-mini", api_key=config.OPENAI_API_KEY),
+    LLMTask.AFFILIATE_LINKER:   lambda: ChatOllama(model="llama3.1:latest", base_url=config.OLLAMA_BASE_URL),
+    LLMTask.SEO_OPTIMIZER:      lambda: ChatOllama(model="gemma2:9b", base_url=config.OLLAMA_BASE_URL),
+    LLMTask.SOCIAL_SNIPPETS_KO: lambda: ChatOpenAI(model="gpt-4o-mini", api_key=config.OPENAI_API_KEY),
     LLMTask.SOCIAL_SNIPPETS_EN: lambda: ChatOpenAI(model="gpt-4o-mini", api_key=config.OPENAI_API_KEY),
 }
 
