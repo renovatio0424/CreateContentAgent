@@ -1,5 +1,6 @@
 # pipeline/nodes/seo.py
 import json
+import re
 from pipeline.state import ContentState
 from pipeline.llm_router import get_llm, LLMTask
 from langchain_core.messages import HumanMessage
@@ -23,8 +24,9 @@ async def seo_optimizer_node(state: ContentState) -> ContentState:
         response = await llm.ainvoke([HumanMessage(content=prompt)])
         raw = response.content.strip()
         if "```" in raw:
-            raw = raw.split("```")[1].replace("json", "").strip()
+            raw = re.sub(r"^```(?:json)?\s*", "", raw, flags=re.IGNORECASE)
+            raw = re.sub(r"\s*```$", "", raw).strip()
         seo_meta = json.loads(raw)
         return {**state, "seo_meta": seo_meta, "error": None}
-    except Exception as e:
-        return {**state, "seo_meta": {"title": "", "description": "", "keywords": []}, "error": str(e)}
+    except Exception:
+        return {**state, "seo_meta": {"title": "", "description": "", "keywords": []}}
