@@ -12,7 +12,9 @@ class ReviewQueue:
         self._ensure_file()
 
     def _ensure_file(self):
-        os.makedirs(os.path.dirname(self.queue_file), exist_ok=True)
+        parent = os.path.dirname(self.queue_file)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
         if not os.path.exists(self.queue_file):
             self._write({})
 

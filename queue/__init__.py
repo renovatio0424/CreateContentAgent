@@ -28,3 +28,9 @@ if _stdlib_queue_path:
     PriorityQueue = _mod.PriorityQueue
     SimpleQueue = _mod.SimpleQueue
     __all__ = ["Empty", "Full", "Queue", "LifoQueue", "PriorityQueue", "SimpleQueue"]
+else:
+    raise ImportError(
+        "Could not find stdlib 'queue' module. "
+        "The project's queue/ directory shadows it. "
+        "Check your Python environment's sys.path."
+    )
